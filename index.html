@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SiGML Player Applet vhg.2021</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Access-Control-Allow-Methods" content="GET">
+    <link rel="stylesheet" href="http://localhost/jas/loc2023/cwa/cwasa.css" />
+    <script type="text/javascript" src="http://localhost/jas/loc2023/cwa/allcsa.js"></script>
+    <script type="text/javascript">
+        var playingTimeout; // Global variable to keep track of the timeout
+        var stopRequested = false; // Global variable to track stop requests
+        var categories = {}; // Global variable to store categories
+
+        // Load categories from JSON file
+        fetch('categories_files.json')
+            .then(response => response.json())
+            .then(data => {
+                categories = data;
+                populateCategoryMenus();
+            });
+
+        // Play a single SiGML URL
+        function playSiGML(sigmlURL) {
+            var loc = window.location.href;
+            var locDir = loc.substring(0, loc.lastIndexOf('/'));
+            sigmlURL = locDir + "/" + sigmlURL;
+            CWASA.playSiGMLURL(sigmlURL);
+        }
+
+        // Play gloss words sequentially
+        function playGloss() {
+            stopRequested = false; // Reset the stop request flag
+            var glossInput = document.getElementById("glossInput").value;
+            var glosses = findGlosses(glossInput);
+            playGlossesSequentially(glosses, 0);
+        }
+
+        // Sliding window function to find valid glosses
+        function findGlosses(input) {
+            var words = input.split(' ');
+            var glosses = [];
+            for (var i = 0; i < words.length; i++) {
+                for (var len = 2; len >= 1; len--) {
+                    if (i + len <= words.length) {
+                        var potentialGloss = words.slice(i, i + len).join(' ');
+                        if (isValidGloss(potentialGloss)) {
+                            glosses.push(potentialGloss);
+                            i += len - 1;
+                            break;
+                        }
+                    }
+                }
+            }
+            return glosses;
+        }
+
+        // Check if a gloss (file name) is valid
+        function isValidGloss(gloss) {
+            var fileExists = false;
+            var request = new XMLHttpRequest();
+            request.open('HEAD', "sigml/" + gloss + ".sigml", false);
+            request.onload = function () {
+                if (request.status == 200) {
+                    fileExists = true;
+                }
+            };
+            request.send();
+            return fileExists;
+        }
+
+        // Recursive function to play glosses sequentially
+        function playGlossesSequentially(glosses, index) {
+            if (index < glosses.length && !stopRequested) {
+                var sigmlURL = "sigml/" + glosses[index] + ".sigml";
+                playSiGML(sigmlURL);
+
+                playingTimeout = setTimeout(function () {
+                    playGlossesSequentially(glosses, index + 1);
+                }, 1650);
+            }
+        }
+
+        // Function to reset the input and stop the avatar
+        function resetGloss() {
+            document.getElementById("glossInput").value = "";
+            stopRequested = true; // Set the stop request flag
+            clearTimeout(playingTimeout);
+        }
+
+        // Populate category menus
+        function populateCategoryMenus() {
+            var categoriesDiv = document.getElementById("categories");
+            for (var category in categories) {
+                var select = document.createElement("select");
+                select.setAttribute("id", category);
+                var defaultOption = document.createElement("option");
+                defaultOption.value = "";
+                defaultOption.text = category;
+                select.appendChild(defaultOption);
+                categories[category].forEach(function (word) {
+                    var option = document.createElement("option");
+                    option.value = word;
+                    option.text = word;
+                    select.appendChild(option);
+                });
+                categoriesDiv.appendChild(select);
+                categoriesDiv.appendChild(document.createElement("br"));
+            }
+        }
+
+        // Add selected words to the text input
+function addSelectedWords() {
+    var glossInput = document.getElementById("glossInput");
+    var selectedWords = [];
+    for (var category in categories) {
+        var select = document.getElementById(category);
+        for (var option of select.options) {
+            if (option.selected && option.value !== "") {
+                selectedWords.push(option.value);
+            }
+        }
+        // Reset the selector
+        select.selectedIndex = 0;
+    }
+    glossInput.value = selectedWords.join(' ');
+}
+
+    </script>
+</head>
+
+<body onload="CWASA.init();">
+
+    <div style="box-sizing: border-box; width: 100%; height: 100%; padding: 15px;">
+        <table align="center" style="width:100%; height:100%;">
+            <tr align="center" class="avatar-container">
+                <td width="100%" height="100%">
+                    <div class="CWASAAvatar av0" align="center" style="width: 100%; height: 100%;"></div>
+                </td>
+            </tr>
+            <tr class="controls-container">
+                <td align="center">
+                    <span class="CWASAAvMenu av0"></span>
+                    <!-- Add gloss input and button -->
+                    <input type="text" id="glossInput" placeholder="أدخل النص الذي ترغب في ترجمته" />
+                    <button onclick="playGloss()">Sign</button>
+                    <button onclick="resetGloss()">Reset</button>
+
+                    <div id="categories"></div>
+                    <button onclick="addSelectedWords()">Add Selected Words</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+ 
