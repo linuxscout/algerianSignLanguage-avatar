@@ -1,3 +1,22 @@
+"""
+Script to extract filenames from a directory structure and save them in various formats.
+
+Usage:
+    python script.py -s <source_directory> -o <output_directory> -a <action>
+
+Arguments:
+    -s, --source    : Path to the source directory containing categorized subdirectories.
+    -o, --output    : Path to the output directory where results will be saved.
+    -a, --action    : Action to perform, choose from:
+                      - "all": Save all outputs (wordlist, categories, statistics, JSON).
+                      - "wordlist": Save extracted filenames in CSV.
+                      - "categories": Save category names in CSV.
+                      - "statistics": Save word count statistics per category in CSV.
+                      - "json": Save category and word mappings in JSON.
+
+Example:
+    python script.py -s ./data -o ./output -a all
+"""
 import os
 import csv
 import json
