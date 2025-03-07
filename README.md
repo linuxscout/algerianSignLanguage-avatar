@@ -63,7 +63,15 @@ http://localhost:8000
 ## Screenshots 📸
 ![UI Preview](docs/images/sui.png)
 
+## Resources & Links 🔗
+- [Algerian Sign Language (FaceBook page)](https://www.facebook.com/profile.php?id=100093996740140)
+- [DictaSign Project](https://www.sign-lang.uni-hamburg.de/dicta-sign/portal/concepts/concepts_fre.html)
+- [HamNoSys Notation System](https://www.sign-lang.uni-hamburg.de/hamnosys.html)
+- [SiGML (Signing Gesture Markup Language)](https://vh.cmp.uea.ac.uk/index.php/SiGML)
+- [CWASA Signing Avatars](https://vh.cmp.uea.ac.uk/index.php/CWA_Signing_Avatars)
+
 ## Citation & Documentation 📚
+
 If you use this project in your research, please cite:
 
 ### Master Thesis
@@ -91,7 +99,11 @@ If you use this project in your research, please cite:
   }
   ```
 
+## Acknowledgment 🙌
+We sincerely thank **Mr. Youcef Benyahia** for his expert contributions to our **3D avatars and animations**. Special thanks to **Mrs. Dharbou Maroua**, whose dedication as a **sign language specialist** greatly enhanced the quality of over 300 Algerian Sign Language (ASL) gestures. We are also grateful to the **teachers of the School for the Deaf in Beni Slimane, Medea**, for their essential feedback during prototype testing.
+
 ## Contributors 👥
+
 - [Amine Mami](@TheCongres)
 - Mohamed Elfares Slimani
 - [Taha Zerrouki](@linuxscout) (Supervisor)
