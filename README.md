@@ -75,7 +75,7 @@ http://localhost:8000
 If you use this project in your research, please cite:
 
 ### Master Thesis
-* [PDF](docs/asl-3d-avatar-master-memory.pdf)  A. Mami and M. E. Slimani, *Automated Arabic Algerian Sign Language Translation System Based on 3D Avatar Technology*, Final Master Project, Dept. of Mathematics and Computer Science, Faculty of Sciences, Yahia Fares Univ. of Médéa, 2023-2024.
+* [PDF](docs/asl-3d-avatar-master-memory.pdf)  Amine Mami, Mohamed elFares Slimani, *Automated Arabic Algerian Sign Language Translation System Based on 3D Avatar Technology*, Final Master Project, Dept. of Mathematics and Computer Science, Faculty of Sciences, Yahia Fares Univ. of Médéa, 2023-2024.
   
   ```
   @mastersthesis{Mami2024,
@@ -87,7 +87,7 @@ If you use this project in your research, please cite:
   ```
 
 ### Research Paper
-* [PDF](NAFATH-4th-ID-141-ALSL2024.pdf)  A. Mami, M. E. Slimani,  T. Zerrouki and and Redha Mazari, “Arabic Algerian Sign Language Translation System Based on 3D Avatar Technology,” *Nafath*, Mada Center, Qatar, 2024.
+* [PDF](NAFATH-4th-ID-141-ALSL2024.pdf)  Amine Mami, Mohamed elFares Slimani,  Taha Zerrouki and and Redha Mazari, “Arabic Algerian Sign Language Translation System Based on 3D Avatar Technology,” *Nafath*, Mada Center, Qatar, 2024.
   
   ```
   @article{Mami-nafath2024,
@@ -105,7 +105,7 @@ We sincerely thank **Mr. Youcef Benyahia** for his expert contributions to our *
 ## Contributors 👥
 
 - [Amine Mami](@TheCongres)
-- Mohamed Elfares Slimani
+- [Mohamed Elfares Slimani](@faresS69)
 - [Taha Zerrouki](@linuxscout) (Supervisor)
 - Redha Mazari
 
